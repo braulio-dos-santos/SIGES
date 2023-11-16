@@ -1,0 +1,146 @@
+<div class="modal fade modal-stock" id="modal-stock" aria-labelledby="modal-stock" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <form action="{{ route('equipamentos.store')}}" method="POST" id="equipamentoForm" enctype="multipart/form-data">
+      {{ csrfField() }}
+      <div class="modal-content">
+        <div class="modal-header align-items-center p-3 p-md-5">
+          <h2 class="modal-title" id="exampleModalGridTitle">Adicionar Equipamento</h2>
+          <div>
+            <button type="button" onclick="atualizarDataHora()" class="btn btn-light btn-pill mr-1 mr-md-2"
+              data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary btn-pill">Salvar</button>
+
+          </div>
+        </div>
+        <div class="modal-body p-3 p-md-5">
+          <div class="row">
+            <div class="col-lg-8">
+              <h3 class="h5 mb-5">Informação do Equipamento</h3>
+              <div class="form-group mb-5">
+                <label for="new-product">Nome do Equipamento</label>
+                <input type="text" name="nome" class="form-control" id="new-product" placeholder="Nome" required>
+                @if(flashMessages.has('errors.username'))
+                <p> {{ flashMessages.get('errors.username') }} </p>
+                @endif
+
+              </div>
+              <div class="form-group mb-5">
+                <label for="new-product">Fabricante</label>
+                <input type="text" name="fabricante" class="form-control" id="new-product" placeholder="Fabricante"
+                  required>
+              </div>
+              <div class="form-group mb-5">
+                <label for="new-product">Data de fabricação</label>
+                <input type="date" name="data_fabricacao" class="form-control" id="new-product"
+                  placeholder="Data de fabricação" required>
+              </div>
+              <div class="form-row mb-4">
+                <div class="col">
+                  <label for="price">Preço de Compra</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">AKZ</span>
+                    </div>
+                    <input type="number" name="preco_compra" class="form-control" id="price" placeholder="Preço"
+                      aria-label="Preço" aria-describedby="basic-addon1" required>
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="sale-price">Quantidade em Stock</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon2">#</span>
+                    </div>
+                    <input type="number" name="quantidade_stock" class="form-control" id="sale-price"
+                      placeholder="Quantidade" aria-label="SalePrice" aria-describedby="basic-addon2" required>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="model">Modelo</label>
+                <input type="text" name="modelo" class="form-control" id="model" placeholder="Modelo" required>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="model">Hora de registro</label>
+                <input name="data_equipamento" id="data_equipamento" class="form-control" type="text" value=""
+                  style="border-color: black;" readonly>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="model">Data de registro</label>
+                <input name="hora_equipamento" id="hora_equipamento" class="form-control" type="text" value=""
+                  style="border-color: black;" readonly >
+              </div>
+              <div class="editor">
+                <label class="d-block" for="description">Descrição</label>
+                <div id="standalone">
+                  <div id="toolbar">
+                    <span class="ql-formats">
+                      <select class="ql-font"></select>
+                      <select class="ql-size"></select>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <select class="ql-color"></select>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-blockquote"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                      <button class="ql-indent" value="-1"></button>
+                      <button class="ql-indent" value="+1"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-direction" value="rtl"></button>
+                      <select class="ql-align"></select>
+                    </span>
+                  </div>
+                </div>
+                <div id="editor" name="descricao"></div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="custom-file">
+                <input type="file" name="image" class="custom-file-input" id="customFile"
+                  placeholder="please image here" required>
+                <span class="upload-image">Clique aqui para <span class="text-primary">adicionar
+                    uma imagem do
+                    equipamento.</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<script>
+  function atualizarDataHora() {
+                        // Cria um objeto Date com a data e hora atuais
+                        var dataAtual = new Date();
+
+                        // Formata a data e hora no formato desejado
+                        var dataFormatada = dataAtual.getFullYear() + "-" + (dataAtual.getMonth() + 1).toString().padStart(2, "0") + "-" + dataAtual.getDate().toString().padStart(2, "0");
+
+                        var horaFormatada = dataAtual.getHours() + ":" + dataAtual.getMinutes() + ":" + dataAtual.getSeconds();
+
+                        // Atualiza os valores dos elementos input com a data e hora formatadas
+                        document.getElementById("data_equipamento").value = dataFormatada;
+                        document.getElementById("hora_equipamento").value = horaFormatada;
+                    }
+
+                    // Chama a função para atualizar a data e hora ao carregar a página
+                    atualizarDataHora();
+</script>

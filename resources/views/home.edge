@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en" dir="ltr">
+
+@include('partials/head')
+
+<body class="navbar-fixed sidebar-fixed" id="body">
+  <script>
+    NProgress.configure({ showSpinner: false });
+    NProgress.start();
+  </script>
+
+
+  <div id="toaster"></div>
+
+
+  <!-- ====================================
+    ——— WRAPPER
+    ===================================== -->
+  <div class="wrapper">
+
+    <!-- ====================================
+          ——— LEFT SIDEBAR WITH OUT FOOTER
+        ===================================== -->
+    @include('partials/aside.edge')
+
+    <!-- ====================================
+      ——— PAGE WRAPPER
+      ===================================== -->
+    <div class="page-wrapper">
+
+      <!-- Header -->
+      <header class="main-header" id="header">
+        <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+          <!-- Sidebar toggle button -->
+          <button id="sidebar-toggler" class="sidebar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+
+          <span class="page-title">Sistema de Gestão de Equipamentos em Stock - SIGES</span>
+
+          <style>
+            .notification {
+              background-color: #ffcc00;
+              color: #333;
+              padding: 10px;
+              border-radius: 5px;
+              text-align: center;
+              position: fixed;
+              top: 20px;
+              left: 50%;
+              transform: translateX(-50%);
+              z-index: 9999;
+              opacity: 1;
+              transition: opacity 0.5s;
+            }
+
+            .notification.hidden {
+              opacity: 0;
+            }
+          </style>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+            $(document).ready(function () {
+              if ($('#notification').length) {
+                // Wait for 5 seconds, then fade out and remove the notification
+                setTimeout(function () {
+                  $('#notification').addClass('hidden');
+                  setTimeout(function () {
+                    $('#notification').remove();
+                  }, 500); // This delay should match the CSS transition time (0.5s)
+                }, 5000); // 5 seconds
+              }
+            });
+          </script>
+          <div class="navbar-right ">
+
+            <!-- search form -->
+            <div class="search-form">
+              <form action="index.html" method="get">
+                <div class="input-group input-group-sm" id="input-group-search">
+                  <input type="text" autocomplete="off" name="query" id="search-input" class="form-control"
+                    placeholder="Search..." />
+                  <div class="input-group-append">
+                    <button class="btn" type="button">/</button>
+                  </div>
+                </div>
+              </form>
+              <ul class="dropdown-menu dropdown-menu-search">
+
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Morbi leo risus</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Dapibus ac facilisis in</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Porta ac consectetur ac</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Vestibulum at eros</a>
+                </li>
+
+              </ul>
+
+            </div>
+
+            <ul class="nav navbar-nav">
+              <!-- Offcanvas -->
+
+              <li class="custom-dropdown">
+                <div class="dropdown-notify">
+                  @include('partials/header')
+
+                  <!-- ====================================
+        ——— CONTENT WRAPPER
+        ===================================== -->
+                  <div class="content-wrapper">
+                    <div class="content">
+                      <!-- Top Statistics -->
+                      @include('partials/top-statistics')
+
+
+                      <!-- Table Equipamentos -->
+                      @include('partials/table-equipamentos')
+
+                      <div class="row">
+                        <div class="col-xl-8">
+
+                          <!-- Sales by Product -->
+                          <div class="card card-default">
+                            <div class="card-header align-items-center">
+                              <h2 class="">Equipamentos</h2>
+                              <a href="#" class="btn btn-primary btn-pill" data-toggle="modal"
+                                data-target="#modal-stock">Adicionar
+                                Equipamento</a>
+                            </div>
+                            <div class="card-body">
+                              <div class="tab-content">
+                                <table id="product-sale" class="table table-product" style="width:100%">
+                                  <thead>
+                                    <tr>
+                                      <th>Nome</th>
+                                      <th>Quantidade</th>
+                                      <th>Modelo</th>
+                                      <th>Outros</th>
+                                      <th class="th-width-250"></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @each(equipamento in equipamentos)
+                                    <tr>
+                                      <td>
+                                        {{ equipamento.nome }}
+                                      </td>
+                                      <td>
+                                        {{ equipamento.quantidade_stock }}
+                                      </td>
+                                      <td>
+                                        {{ equipamento.modelo }}
+                                      </td>
+                                      <td>Lorem, ipsum.</td>
+                                    </tr>
+                                    @endeach
+                                  </tbody>
+
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <!-- Formulário para salvar um equipamento no stock -->
+                      @include('partials/add-equipamento.edge')
+                    </div>
+
+                  </div>
+
+                  <!-- Footer -->
+                  @include('partials/footer')
+
+                </div>
+          </div>
+
+          <!-- Card Offcanvas -->
+          @include('partials/card-offcanvas.edge')
+
+          <!-- Scripts -->
+
+          @include('partials/scripts.edge')
+
+          <!--  -->
+
+</body>
+
+</html>

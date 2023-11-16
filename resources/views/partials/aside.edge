@@ -1,0 +1,88 @@
+<aside class="left-sidebar sidebar-dark" id="left-sidebar">
+  <div id="sidebar" class="sidebar sidebar-with-footer">
+    <!-- Aplication Brand -->
+    <div class="app-brand">
+      <a href="{{ route('equipamentos.index' )}}">
+        <!-- <img src="images/logo.png" alt="Mono"> -->
+        <span class="brand-name">Gestão de Stock</span>
+      </a>
+    </div>
+    <!-- begin sidebar scrollbar -->
+    <div class="sidebar-left" data-simplebar style="height: 100%;">
+      <!-- sidebar menu -->
+      <ul class="nav sidebar-inner" id="sidebar-menu">
+        <li class="">
+          <a class="sidenav-item-link" href="{{ route('equipamentos.index')}}">
+            <i class="mdi mdi-briefcase-account-outline"></i>
+            <span class="nav-text">Página Inicial</span>
+          </a>
+        </li>
+
+        <li class="">
+          <a class="sidenav-item-link" href="{{ route('equipamentos.index')}}" data-toggle="modal" data-target="#modal-stock">
+            <i class="mdi mdi-briefcase-account-outline"></i>
+            <span class="nav-text">Adicionar</span>
+          </a>
+        </li>
+
+        @if(flashMessages.has('notification'))
+        <div id="notification" class="notification">
+          {{ flashMessages.get('notification') }}
+        </div>
+        @endif
+
+        {{-- <li class="">
+          <a class="sidenav-item-link" href="{{ route('equipamentos.create' )}}">
+            <i class="mdi mdi-briefcase-account-outline"></i>
+            <span class="nav-text">Adicionar</span>
+          </a>
+        </li> --}}
+
+        <li class="has-sub">
+          <!-- <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                data-target="#authentication" aria-expanded="false" aria-controls="authentication">
+                <i class="mdi mdi-account"></i>
+                <span class="nav-text">Authentication</span> <b class="caret"></b>
+              </a> -->
+          <ul class="collapse" id="authentication" data-parent="#sidebar-menu">
+            <div class="sub-menu">
+
+              <li>
+                <a class="sidenav-item-link" href="sign-in.html">
+                  <span class="nav-text">Sign In</span>
+
+                </a>
+              </li>
+
+
+              <li>
+                <a class="sidenav-item-link" href="sign-up.html">
+                  <span class="nav-text">Sign Up</span>
+
+                </a>
+              </li>
+
+
+              <li>
+                <a class="sidenav-item-link" href="reset-password.html">
+                  <span class="nav-text">Reset Password</span>
+
+                </a>
+              </li>
+
+
+
+
+            </div>
+          </ul>
+        </li>
+
+
+
+
+      </ul>
+
+    </div>
+
+  </div>
+</aside>

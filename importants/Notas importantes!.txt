@@ -1,0 +1,7 @@
+O que fazer mais no sistema de gestão de stock!?
+
+contabilizar todos os dados pelo tipo,
+função para pesquisar por um dado,
+
+
+Questões: O que um sistema de gestão de stock deve ter?
